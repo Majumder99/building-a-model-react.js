@@ -1,34 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React, { useState } from "react";
+import Model from "./Model";
 
-function App() {
-  const [count, setCount] = useState(0)
+const button_wrapper_styles = {
+  position: "relative",
+  zIndex: 1,
+};
 
+const other_content_styles = {
+  position: "relative",
+  zIndex: 2,
+  backgroundColor: "red",
+  padding: "10px",
+};
+
+const App = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const onClose = () => {
+    setIsOpen(false);
+  };
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <>
+      <div style={button_wrapper_styles}>
+        <button onClick={() => setIsOpen(true)}>Open Model</button>
+        <Model open={isOpen} onClose={onClose}>
+          Fancy Model
+        </Model>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
+      <div style={other_content_styles}>Other Contents</div>
+    </>
+  );
+};
 
-export default App
+export default App;
